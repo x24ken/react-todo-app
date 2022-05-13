@@ -6,11 +6,8 @@ import { CompleteArea } from "./compornents/CompleteArea";
 
 export const App = () => {
   const [todoText, setTodoText] = useState("");
-  const [inCompleteTodos, setInCompleteTodos] = useState([
-    "ああああ",
-    "いいいいい"
-  ]);
-  const [completeTodos, setCompleteTodos] = useState(["ううううううう"]);
+  const [inCompleteTodos, setInCompleteTodos] = useState([]);
+  const [completeTodos, setCompleteTodos] = useState([]);
 
   const onChangeTodoText = (event) => setTodoText(event.target.value);
 
@@ -51,8 +48,11 @@ export const App = () => {
         todoText={todoText}
         onChange={onChangeTodoText}
         onClick={onClickAdd}
+        disabled={inCompleteTodos.length >= 5}
       />
-
+      {inCompleteTodos.length >= 5 && (
+        <p style={{ color: "red" }}>登録できるTODOは５個まで</p>
+      )}
       <IncompleteArea
         inCompleteTodos={inCompleteTodos}
         onClickComplete={onClickComplete}
